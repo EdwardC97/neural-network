@@ -1,16 +1,28 @@
-# This is a sample Python script.
+import numpy as np
+from neuron import Neuron
+from layer import Layer
+from network import Network
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+layer1 = Layer([
+    Neuron(weights=[1, -1], bias=0),
+    Neuron(weights=[-1, 1], bias=0),
+])
+
+layer2 = Layer([
+    Neuron(weights=[1, 1], bias=0),
+])
+
+network = Network([
+    layer1,
+    layer2
+])
+
+inputs = [3.0, 2.0]
+
+output = network.forward(inputs)
+
+print(output)
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
