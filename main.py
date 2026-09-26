@@ -5,39 +5,30 @@ from network import Network
 from activations import relu
 from activations import sigmoid
 from losses import squared_error
+from optimiser import update_weight
 
-# layer1 = Layer([
-#     Neuron(weights=[1, -1], bias=0),
-#     Neuron(weights=[-1, 1], bias=0),
-# ])
-#
-# layer2 = Layer([
-#     Neuron(weights=[1, 1], bias=0),
-# ])
-#
-# network = Network([
-#     layer1,
-#     layer2
-# ])
-#
-# inputs = [3.0, 2.0]
-#
-# output = network.forward(inputs)
-#
-# print(output)
-#
-# values = [-3, -1, 0, 1, 3]
-#
-# for value in values:
-#     print(value, relu(value))
+inputs = [1, 2, 3, 4]
+targets = [5, 10, 15, 20]
 
-values = [-5, -2, -1, 0, 1, 2, 5]
+weight = 1.0
+learning_rate = 0.0216
 
-for value in values:
-    print(value, sigmoid(value))
+for epoch in range(20):
 
-print(squared_error(0.8,1))
-print(squared_error(0.1, 1))
+    for x, target in zip(inputs, targets):
 
+        # Forward pass
+        prediction = x * weight
 
+        # Loss
+        loss = (prediction - target) ** 2
 
+        # Gradients
+        loss_gradient = 2 * (prediction - target)
+        prediction_gradient = x
+        weight_gradient = loss_gradient * prediction_gradient
+
+        # Update weight
+        weight = weight - learning_rate * weight_gradient
+
+    print("Epoch:", epoch, "Weight:", weight)
